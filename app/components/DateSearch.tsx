@@ -3,7 +3,8 @@ import { useState } from "react";
 import { addDays } from "date-fns";
 import 'react-date-range/dist/styles.css';
 import 'react-date-range/dist/theme/default.css';
-import { DateRangePicker, Range } from 'react-date-range';
+import { Range, DateRangePicker } from "react-date-range";
+
 
 const DateRange = () => {
     const [isCheckInOpened,SetIsCheckInOpened] = useState(false);
