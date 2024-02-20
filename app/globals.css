@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+*{
+  background-color: rgb(202, 202, 202);
+  color:black;
+}
+
+body {
+  height: max-content;
+  position: relative;
+}
+
+.small-line {
+  width: 50px;
+  height: 2px; 
+  background-color: #000; 
+  margin-top: 5px;
+  margin-bottom:10px;
+}
+
+.rdrDefinedRangesWrapper {
+  display: none;
+}
+
+span{
+  
+  font-weight: bold;
+}
+
+
+.customDataRangePicker .rdrDateDisplayWrapper{
+  background-color: rgb(148 163 184);
+}
+
+
+.rdrMonthAndYearWrapper
+{
+  background-color: rgb(148 163 184);
+}
+
+.rdrDateDisplay
+{
+  background-color: rgb(148 163 184);
+}
+
+.rdrMonthAndYearPickers
+{
+  background-color: rgb(148 163 184);
+}
+.rdrMonthPicker
+{
+  background-color: rgb(148 163 184);
+}
+
+.rdrYearPicker
+{
+  background-color: rgb(148 163 184);
+}
+
+.customDataRangePicker i{
+  background-color: transparent;
+}
+
+.rdrMonth
+{
+  background-color: rgb(148 163 184);
+}
+
+.customDataRangePicker .rdrMonthName{
+  background-color: rgb(148 163 184);
+  color: black;
+  font-weight: bold;
+}
+
+.customDataRangePicker .rdrWeekDay
+{
+  background-color: rgb(148 163 184);
+  color:black;
+  font-weight: bold;
+}
+
+.customDataRangePicker .rdrDay{
+  background-color: rgb(148 163 184);
+}
+.rdrDayNumber{
+  background-color: rgb(148 163 184);
+}
+.rdrDayNumber span{
+  background-color: rgb(148 163 184);
+}
+.rdrDays{
+  
+  border: 2px solid rgb(203 213 225);
+}
