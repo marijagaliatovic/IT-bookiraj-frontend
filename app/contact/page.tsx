@@ -3,6 +3,7 @@
 import Link from "@/node_modules/next/link";
 import { SetStateAction, useState } from "react";
 import Footer from "../components/Footer";
+import NavBar from "../components/NavBar";
 
 export default function Contact() {
   const [username, setUsername] = useState("");
@@ -31,6 +32,7 @@ export default function Contact() {
 
   return (
     <>
+      <NavBar/>
       <div className="flex flex-col items-center relative lg:mt-12 py-8">
         <h2 className="font-bold text-xl lg:text-2xl self-center lg:mt-10 top-24">
           Contact Us

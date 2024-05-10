@@ -1,4 +1,5 @@
 import Footer from "../components/Footer";
+import NavBar from "../components/NavBar";
 import ReviewItem from "../components/ReviewItem";
 import getAllReviews from "@/lib/contentfulAllReviews";
 
@@ -8,6 +9,7 @@ const Reviews = async () => {
 
     return(
       <>
+        <NavBar/>
         <div className="flex flex-col items-center relative lg:mt-12 py-8">
             <h2 className="font-bold text-xl lg:text-2xl self-center mt-10 top-24">Reviews</h2>
             <div className="small-line"></div>
