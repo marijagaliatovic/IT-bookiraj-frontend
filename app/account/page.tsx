@@ -35,7 +35,7 @@ export default function Account(){
             try {
                 console.log("User id: " + userId);
                 if (userId) {
-                    const response = await fetch(`http://localhost:8080/logIn/user/${userId}`, {
+                    const response = await fetch(`https://it-bookiraj-backend.onrender.com/logIn/user/${userId}`, {
                         method: "GET",
                         credentials: "include",
                         headers: {
@@ -62,6 +62,7 @@ export default function Account(){
     const handleLogout = ()=> {
         localStorage.clear();
         setUser(undefined);
+        //need to clear session on backend when user logs out
     }
 
     return (

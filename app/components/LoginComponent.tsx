@@ -39,7 +39,8 @@ export default function LoginComponent() {
     }
 
     try{
-      const response = await fetch("http://localhost:8080/logIn", {
+      const response = await fetch("https://it-bookiraj-backend.onrender.com/logIn",{
+      //const response = await fetch("http://localhost:8080/logIn", {
         method: "POST",
         credentials: "include",
         headers: {
