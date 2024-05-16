@@ -44,7 +44,7 @@ export default function Signup() {
     }
 
     try{
-      const response = await fetch("https://it-bookiraj-backend.onrender.com/signUp", {
+      const response = await fetch("https://node-mongodb-api-v19y.onrender.com/signUp", {
       method: "POST",
       headers: {
         "Content-Type": "application/json" // Specify JSON content type

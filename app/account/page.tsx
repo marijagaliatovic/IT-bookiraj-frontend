@@ -35,7 +35,7 @@ export default function Account(){
             try {
                 console.log("User id: " + userId);
                 if (userId) {
-                    const response = await fetch(`https://it-bookiraj-backend.onrender.com/logIn/user/${userId}`, {
+                    const response = await fetch(`https://node-mongodb-api-v19y.onrender.com/logIn/user/${userId}`, {
                         method: "GET",
                         credentials: "include",
                         headers: {
