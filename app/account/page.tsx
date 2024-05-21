@@ -69,7 +69,7 @@ export default function Account(){
                 credentials: "include"
             });
     
-            console.log("Response from logging out:" + response);
+            console.log("Response from logging out:" + JSON.stringify(response));
             if (!response.ok) {
                 throw new Error("Network response was not ok");
             }
