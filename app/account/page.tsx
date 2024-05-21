@@ -63,7 +63,7 @@ export default function Account(){
         localStorage.clear();
         setUser(undefined);
         //need to clear session on backend when user logs out
-        try{
+         try{
             const response = await fetch( `${process.env.EXPRESS_API_URL}/logIn/logOut`, {
                 method: "POST",
                 credentials: "include"
@@ -75,7 +75,7 @@ export default function Account(){
             }
         }catch(error){
             console.error('Error logging out:', error);
-        }
+        } 
         
     }
 
