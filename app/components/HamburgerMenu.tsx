@@ -1,3 +1,5 @@
+"use client"
+
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
@@ -5,41 +7,61 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 export type HamburgerProps = {
   open: boolean;
   clickHandler: Dispatch<SetStateAction<boolean>>;
-  user:string;
 };
 
-export default function HamburgerMenu({ open, clickHandler,user }: HamburgerProps) {
-    const [isAccommodationOpen, setIsAccommodationOpen] = useState(false);
-  
-   const handleAccommodationClick = () => {
-    setIsAccommodationOpen(!isAccommodationOpen);
-   }
+export default function HamburgerMenu({ open, clickHandler }: HamburgerProps) {
+  const [isAccommodationOpen, setIsAccommodationOpen] = useState(false);
+  const [newUser, setnewUser] = useState<string>(""); 
 
-    const handleNavBarClick = () => {
-      if(isAccommodationOpen)
-      {
-        setIsAccommodationOpen(false);
+  const handleAccommodationClick = () => {
+  setIsAccommodationOpen(!isAccommodationOpen);
+  }
+
+  const handleNavBarClick = () => {
+    if(isAccommodationOpen)
+    {
+      setIsAccommodationOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    //const checkAuthentication = async () => {
+      try {
+        const storedUser = localStorage.getItem('user');
+        console.log("storedUSer: ", storedUser);
+        if(storedUser){
+          const parsedUser = JSON.parse(storedUser)
+          if(newUser != parsedUser.passport.user){
+            //console.log("parsedUser: ", parsedUser);
+            //userInfo(parsedUser.passport.user);
+            setnewUser(parsedUser.passport.user);
+            //renderFlag(true);
+          }
+         
+        }
+      }  catch (error) {
+        console.error('Error checking authentication:', error);
       }
+    },[]);
+
+  useEffect(()=>{
+    const handleClickOutside = (event:MouseEvent)=>{
+        const navBar = document.getElementById("navBar");
+        const navIcons = document.getElementById("navIcons");
+        
+        //if dropdown is open and we click outside of dropdown and filters button, close the dropdown
+        if( navBar && !navBar.contains(event.target as Node) && navIcons && !navIcons.contains(event.target as Node)) //If dropdown is not clicked (if event target is not on the dropdown ); Node is interface for nodes in DOM
+        {
+            clickHandler(false); //If we click outside of the filter container it will close it
+        }
     };
 
-    useEffect(()=>{
-      const handleClickOutside = (event:MouseEvent)=>{
-          const navBar = document.getElementById("navBar");
-          const navIcons = document.getElementById("navIcons");
-          
-          //if dropdown is open and we click outside of dropdown and filters button, close the dropdown
-          if( navBar && !navBar.contains(event.target as Node) && navIcons && !navIcons.contains(event.target as Node)) //If dropdown is not clicked (if event target is not on the dropdown ); Node is interface for nodes in DOM
-          {
-              clickHandler(false); //If we click outside of the filter container it will close it
-          }
-      };
+    document.addEventListener("mousedown", handleClickOutside); //if we click anywhere on the document handleClickOutside is called
 
-      document.addEventListener("mousedown", handleClickOutside); //if we click anywhere on the document handleClickOutside is called
-
-      return () => {
-          document.removeEventListener("mousedown", handleClickOutside);
-      }
-    });
+    return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+    }
+  });
     
   return (
     <>
@@ -68,19 +90,19 @@ export default function HamburgerMenu({ open, clickHandler,user }: HamburgerProp
         </li>
         
         <li className="text-base font-semibold not-italic tracking-widest hover:underline cursor-pointer">
-          <Link href="/contact" onClick={()=>{clickHandler(false)}}>CONTACT US</Link>
+          <Link href="/signup"  onClick={()=>{clickHandler(false)}}>SIGN UP</Link>
         </li>
 
-        { user  ? ( 
-          <li className="text-base font-semibold not-italic hover:underline  cursor-pointer bg-transparent"><Link className="bg-transparent" href="/account">ACCOUNT</Link></li>
-            ) : (
-            <li className="text-base font-semibold not-italic hover:underline cursor-pointer bg-transparent">
-              <Link className="bg-transparent" href="/signup">SIGN UP</Link>
-            </li>
-            )}
-          <li className="text-base font-semibold not-italic hover:underline cursor-pointer bg-transparent">
-            <Link className = "bg-transparent" href="/contact">CONTACT US</Link>
-          </li>
+        { newUser  ? (
+        <li className="text-base font-semibold not-italic tracking-widest hover:underline cursor-pointer">
+          <Link href="/contact" onClick={()=>{clickHandler(false)}}>ACCOUNT</Link>
+        </li>
+        ) : (
+        <li className="text-base font-semibold not-italic tracking-widest hover:underline cursor-pointer">
+          <Link href="/contact" onClick={()=>{clickHandler(false)}}>SIGN UP</Link>
+        </li>
+        )}
+       
       </ul>
       </nav> 
     </>
