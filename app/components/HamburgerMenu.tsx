@@ -90,16 +90,16 @@ export default function HamburgerMenu({ open, clickHandler }: HamburgerProps) {
         </li>
         
         <li className="text-base font-semibold not-italic tracking-widest hover:underline cursor-pointer">
-          <Link href="/signup"  onClick={()=>{clickHandler(false)}}>CONTACT US</Link>
+          <Link href="/contact"  onClick={()=>{clickHandler(false)}}>CONTACT US</Link>
         </li>
 
         { newUser  ? (
         <li className="text-base font-semibold not-italic tracking-widest hover:underline cursor-pointer">
-          <Link href="/contact" onClick={()=>{clickHandler(false)}}>ACCOUNT</Link>
+          <Link href="/account" onClick={()=>{clickHandler(false)}}>ACCOUNT</Link>
         </li>
         ) : (
         <li className="text-base font-semibold not-italic tracking-widest hover:underline cursor-pointer">
-          <Link href="/contact" onClick={()=>{clickHandler(false)}}>SIGN UP</Link>
+          <Link href="/signup" onClick={()=>{clickHandler(false)}}>SIGN UP</Link>
         </li>
         )}
        
