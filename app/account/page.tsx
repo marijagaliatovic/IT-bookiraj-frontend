@@ -63,18 +63,19 @@ export default function Account(){
         localStorage.clear();
         setUser(undefined);
         //need to clear session on backend when user logs out
-        const response = await fetch( `${process.env.EXPRESS_API_URL}/logIn/logOut`, {
-            method: "GET",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-                'Accept': 'application/json'
+        try{
+            const response = await fetch( `${process.env.EXPRESS_API_URL}/logIn/logOut`, {
+                method: "POST",
+                credentials: "include"
+            });
+    
+            if (!response.ok) {
+                throw new Error("Network response was not ok");
             }
-        });
-
-        if (!response.ok) {
-            throw new Error("Network response was not ok");
+        }catch(error){
+            console.error('Error logging out:', error);
         }
+        
     }
 
     return (
