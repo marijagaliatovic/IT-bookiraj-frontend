@@ -44,7 +44,7 @@ export default function Signup() {
     }
 
     try{
-      const response = await fetch("https://node-mongodb-api-v19y.onrender.com/signUp", {
+      const response = await fetch("EXPRESS_API_URL/signUp", {
       method: "POST",
       headers: {
         "Content-Type": "application/json" // Specify JSON content type

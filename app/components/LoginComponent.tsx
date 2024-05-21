@@ -39,7 +39,7 @@ export default function LoginComponent() {
     }
 
     try{
-      const response = await fetch("https://node-mongodb-api-v19y.onrender.com/logIn",{
+      const response = await fetch("EXPRESS_API_URL/logIn",{
       //const response = await fetch("http://localhost:8080/logIn", {
         method: "POST",
         credentials: "include",
