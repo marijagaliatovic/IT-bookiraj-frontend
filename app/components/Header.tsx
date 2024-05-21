@@ -1,48 +1,18 @@
 "use client";
 
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 //import axios from 'axios'; 
 //import UserContext, { User } from "../UserContext";
 import Link from "next/link";
 
-export default function Header() {
+interface HeaderProps {
+  user: string;
+}
+
+export default function Header(user:HeaderProps) {
  // const { user, userInfo, renderFlag } = useContext(UserContext);
   const [isAccomodationOpen, setIsAccommodationOpen] = useState(false);
-  const [newUser, setnewUser] = useState<string>("");
-  useEffect(() => {
-    //const checkAuthentication = async () => {
-      try {
-        const storedUser = localStorage.getItem('user');
-        console.log("storedUSer: ", storedUser);
-        if(storedUser){
-          const parsedUser = JSON.parse(storedUser)
-          if(newUser != parsedUser.passport.user){
-            //console.log("parsedUser: ", parsedUser);
-            //userInfo(parsedUser.passport.user);
-            setnewUser(parsedUser.passport.user);
-            //renderFlag(true);
-          }
-         
-        }
-
-        /*const response = await axios.get('http://localhost:8080/login/status', { withCredentials: true });
-        console.log("Status response: " + response);
-        if (response && response.data.user != user) {
-          console.log("Current User:", user, "Response.data.user:", response.data.user);
-          userInfo(response.data.user);
-          console.log("New User: ", user);
-          renderFlag(true);
-        } else {
-          console.log("Current User: ", user);
-          renderFlag(false);
-        }*/
-      }  catch (error) {
-        console.error('Error checking authentication:', error);
-      } 
-    //}
-
-    //checkAuthentication();
-  },[]); 
+ 
 
   const handleAccommodationHover = () => {
     setIsAccommodationOpen(true);
@@ -83,17 +53,17 @@ export default function Header() {
               </ul>
             )}
           </li>
-          
-          { newUser  ? ( 
+          <li className="text-base font-semibold not-italic hover:underline cursor-pointer bg-transparent">
+            <Link className = "bg-transparent" href="/contact">CONTACT US</Link>
+          </li>
+          { user  ? ( 
           <li className="text-base font-semibold not-italic hover:underline  cursor-pointer bg-transparent"><Link className="bg-transparent" href="/account">ACCOUNT</Link></li>
             ) : (
             <li className="text-base font-semibold not-italic hover:underline cursor-pointer bg-transparent">
               <Link className="bg-transparent" href="/signup">SIGN UP</Link>
             </li>
             )}
-          <li className="text-base font-semibold not-italic hover:underline cursor-pointer bg-transparent">
-            <Link className = "bg-transparent" href="/contact">CONTACT US</Link>
-          </li>
+         
 {/* 
         {session && session.user ? (
             <li className="text-base font-semibold not-italic relative  cursor-pointer bg-transparent">

@@ -5,9 +5,10 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 export type HamburgerProps = {
   open: boolean;
   clickHandler: Dispatch<SetStateAction<boolean>>;
+  user:string;
 };
 
-export default function HamburgerMenu({ open, clickHandler }: HamburgerProps) {
+export default function HamburgerMenu({ open, clickHandler,user }: HamburgerProps) {
     const [isAccommodationOpen, setIsAccommodationOpen] = useState(false);
   
    const handleAccommodationClick = () => {
@@ -70,9 +71,16 @@ export default function HamburgerMenu({ open, clickHandler }: HamburgerProps) {
           <Link href="/contact" onClick={()=>{clickHandler(false)}}>CONTACT US</Link>
         </li>
 
-        <li className="text-base font-semibold not-italic tracking-widest hover:underline cursor-pointer">
-          <Link href="/signup"  onClick={()=>{clickHandler(false)}}>SIGN UP</Link>
-        </li>
+        { user  ? ( 
+          <li className="text-base font-semibold not-italic hover:underline  cursor-pointer bg-transparent"><Link className="bg-transparent" href="/account">ACCOUNT</Link></li>
+            ) : (
+            <li className="text-base font-semibold not-italic hover:underline cursor-pointer bg-transparent">
+              <Link className="bg-transparent" href="/signup">SIGN UP</Link>
+            </li>
+            )}
+          <li className="text-base font-semibold not-italic hover:underline cursor-pointer bg-transparent">
+            <Link className = "bg-transparent" href="/contact">CONTACT US</Link>
+          </li>
       </ul>
       </nav> 
     </>
