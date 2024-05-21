@@ -6,7 +6,6 @@ import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 
 export default function Header() {
-  localStorage.clear();
  // const { user, userInfo, renderFlag } = useContext(UserContext);
   const [isAccomodationOpen, setIsAccommodationOpen] = useState(false);
   const [newUser, setnewUser] = useState<string>("");
