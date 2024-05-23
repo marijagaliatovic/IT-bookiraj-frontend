@@ -6,8 +6,11 @@ import image1 from "@/public/images/slika_sobe_1.jpg";
 import image2 from "@/public/images/slika_sobe_2.jpg";
 import image3 from "@/public/images/slika_sobe_3.jpg";
 
+interface slideShowProps {
+  images : string[];
+}
 
-const SlideShow = () => {
+export default function SlideShow()  {
   const images = [image1,image2,image3];
 
   const [slideIndex, setSlideIndex] = useState(0);
@@ -42,6 +45,3 @@ const SlideShow = () => {
         </div>
   );
 };
-
-
-export default SlideShow;

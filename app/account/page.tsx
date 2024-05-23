@@ -64,7 +64,7 @@ export default function Account(){
         setUser(undefined);
         //need to clear session on backend when user logs out
          try{
-            const response = await fetch( `${process.env.EXPRESS_API_URL}/logIn/logOut`, {
+            const response = await fetch( `${process.env.EXPRESS_API_URL}/logIn/logout`, {
                 method: "POST",
                 credentials: "include"
             });
