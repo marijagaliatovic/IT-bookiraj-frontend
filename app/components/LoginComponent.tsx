@@ -66,7 +66,8 @@ export default function LoginComponent() {
     }catch(error){
       console.log(error)
     }
-      
+
+    
   
  }
   

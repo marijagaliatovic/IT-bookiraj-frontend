@@ -92,16 +92,13 @@ export default function Signup() {
         return null;
     }
 
-      console.log("Uslo")
-
     return (
-
       <div className="p-8 bg-slate-700">
         <a className="text-bold text-white bg-transparent">Error: {errorMessage}</a>
       </div>
     );
+  }
 
- }
   return (
     <>
       <div className="flex flex-col items-center relative lg:mt-12 py-8">

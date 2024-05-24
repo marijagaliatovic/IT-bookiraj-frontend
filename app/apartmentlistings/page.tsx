@@ -6,7 +6,6 @@ import Footer from "../components/Footer";
 import Filter from "../components/Filter";
 import { apartmentsItem } from "@/lib/.contentfulClient";
 import { useEffect, useState } from "react";
-import Link from "@/node_modules/next/link";
 
 const ApartmentListings = () => {
   const [apartments, setApartments] = useState<apartmentsItem[]>([]);
