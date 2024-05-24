@@ -83,7 +83,9 @@ export default function Header() {
               </ul>
             )}
           </li>
-          
+          <li className="text-base font-semibold not-italic hover:underline cursor-pointer bg-transparent">
+            <Link className = "bg-transparent" href="/contact">CONTACT US</Link>
+          </li>
           { newUser  ? ( 
           <li className="text-base font-semibold not-italic hover:underline  cursor-pointer bg-transparent"><Link className="bg-transparent" href="/account">ACCOUNT</Link></li>
             ) : (
@@ -91,9 +93,6 @@ export default function Header() {
               <Link className="bg-transparent" href="/signup">SIGN UP</Link>
             </li>
             )}
-          <li className="text-base font-semibold not-italic hover:underline cursor-pointer bg-transparent">
-            <Link className = "bg-transparent" href="/contact">CONTACT US</Link>
-          </li>
 {/* 
         {session && session.user ? (
             <li className="text-base font-semibold not-italic relative  cursor-pointer bg-transparent">
