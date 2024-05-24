@@ -60,17 +60,14 @@ export default function Account(){
     }, [userId]);
 
     const handleLogout = async ()=> {
-        
-        //need to clear session on backend when user logs out
          try{
             const response = await fetch( `${process.env.EXPRESS_API_URL}/logout`, {
                 method: "POST",
                 credentials: "include"
             });
-    
-            console.log("Response from logging out:" + JSON.stringify(response));
             localStorage.clear();
             setUser(undefined);
+            console.log("Response from logging out:" + JSON.stringify(response));
             if (!response.ok) {
                 throw new Error("Network response was not ok");
             }
@@ -82,14 +79,15 @@ export default function Account(){
 
     return (
         <>
+            <NavBar />
             <div className="flex flex-col items-center relative lg:mt-12 py-8">
                 <h2 className="font-bold text-xl lg:text-2xl self-center lg:mt-10 top-24">User</h2>
                 <div className="small-line"></div>
             </div>
             
             <div className="bg-white mb-20 pb-10 mx-5 sm:mx-auto md:mx-auto max-w-md px-10 rounded-md shadow-lg">
-                <label className="bg-white block mb-3 text-lg pt-20 font-semibold">Email: {user?.email}</label>
-                <label className="bg-white block mt-6 mb-3 text-lg font-semibold">Username: {user?.userName}</label>
+                <label className="bg-white block mb-2 text-sm pt-10 font-semibold">Email: {user?.email}</label>
+                <label className="bg-white block mt-4 mb-2 text-sm font-semibold">Username: {user?.userName}</label>
                 <div className="text-center bg-white">
                     <Link href="\">
                         <button onClick={handleLogout} className="mt-5 bg-gray-400 font-bold p-2 rounded-md hover:bg-slate-600 shadow-xl">
