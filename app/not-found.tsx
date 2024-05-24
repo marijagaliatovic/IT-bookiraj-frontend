@@ -6,9 +6,7 @@ import Footer from "./components/Footer";
 export default function NotFound(){
     return(
         <main className="text-center lg:top-36 top-32  relative w-full h-max">
-            
             <div className=" flex flex-col justify-center items-center self-center">
-                
                 <div className=" flex flex-col justify-center items-center ">
                     <h2 className="bg-transparent text-4xl md:text-7xl font-bold">OOPS!</h2>
                     <p className="bg-transparent text-xl md:text-3xl m-2 font-bold">WE COULDN&apos;T FIND THE <br></br>PAGE YOU WERE LOOKING FOR.</p>

@@ -23,10 +23,7 @@ export default function Login() {
   
   return (
     //<UserContext.Provider value={{ user, renderFlag, rerenderFlag, userInfo, loading }}>
-      <>
-        <NavBar/>
         <LoginComponent/>
-      </>
     //</UserContext.Provider>
   );
 }
