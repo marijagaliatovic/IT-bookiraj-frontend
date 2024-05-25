@@ -14,6 +14,8 @@ export interface User {
 export default function LoginComponent() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage,setErrorMessage] = useState("");
+
   //const { user, rerenderFlag, userInfo, renderFlag } = useContext(UserContext);
   
 
@@ -50,26 +52,37 @@ export default function LoginComponent() {
         body: JSON.stringify(userValues) 
       })
 
-    const responseData = await response.json();
-    if (!response.ok) {
-      console.error('Login failed:', responseData.message);
-      throw new Error("Network response was not ok");
-    }
-
-    console.log("responseData from login" + JSON.stringify(responseData));
-    localStorage.setItem('user', JSON.stringify(responseData));
-    //userInfo(responseData); //Set the user to recived data
-    //renderFlag(true); //functions never executed
-  
-    // Redirect to home page after successful login
-    window.location.href = '/'; //full page reload -> need to find better way, router not working
+      const responseData = await response.json();
+      if (!response.ok) {
+        console.log('Login failed:', responseData.message);
+        setErrorMessage(responseData.message);
+      }
+      else{
+        console.log("responseData from login" + JSON.stringify(responseData));
+        localStorage.setItem('user', JSON.stringify(responseData));
+        //userInfo(responseData); //Set the user to recived data
+        //renderFlag(true); //functions never executed
+      
+        // Redirect to home page after successful login
+        window.location.href = '/'; //full page reload -> need to find better way, router not working
+      }
 
     }catch(error){
       console.log(error)
     }
 
+    const displayErrorMessage = () => {
+
+      if(!errorMessage || errorMessage == ''){
+          return null;
+      }
   
- }
+      return (
+        <div className="p-8 bg-slate-700">
+          <a className="text-bold text-white bg-transparent">Error: {errorMessage}</a>
+        </div>
+      );
+    }
   
   return (
       <>
@@ -102,15 +115,14 @@ export default function LoginComponent() {
                   </button>
                   </div>
                   <p className="bg-white mt-5 text-center py-5 text-sm text-gray-300">
-          Don&apos;t have an account?&nbsp;
-          <Link href="/signup">
-            <span className="bg-white font-semi-old hover:underline">
-              Sign up here
-            </span>
-          </Link>
-        </p>
-              </form>y
+                    Don&apos;t have an account?&nbsp;
+                    <Link href="/signup">
+                      <span className="bg-white font-semi-old hover:underline">Sign up here</span>
+                    </Link>
+                  </p>
+          	      {displayErrorMessage()}
+              </form>
           <Footer/>
     </>
   );
-}
+}}
