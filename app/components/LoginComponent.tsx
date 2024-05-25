@@ -55,6 +55,14 @@ export default function LoginComponent() {
     }
 
     const responseData = await response.json();
+    if (response.ok) {
+      console.log('Login successful:', responseData.message);
+      console.log('Logged in user:', responseData.user); // Ensure that user data is available
+      // Handle successful login (e.g., redirect to another page)
+  } else {
+      console.error('Login failed:', responseData.message);
+      // Display error message to the user
+  }
     console.log("responseData from login" + JSON.stringify(responseData));
     localStorage.setItem('user', JSON.stringify(responseData));
     //userInfo(responseData); //Set the user to recived data
@@ -66,6 +74,7 @@ export default function LoginComponent() {
     }catch(error){
       console.log(error)
     }
+
   
  }
   
