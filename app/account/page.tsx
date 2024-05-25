@@ -59,11 +59,11 @@ export default function Account(){
         fetchData();
     }, [userId]);
 
-    const handleLogout = async ()=> {
+    const handleLogout =  ()=> {
         localStorage.clear();
         setUser(undefined);
         //need to clear session on backend when user logs out
-         try{
+         /* try{
             const response = await fetch( `${process.env.EXPRESS_API_URL}/logout`, {
                 method: "POST",
                 credentials: "include"
@@ -76,7 +76,7 @@ export default function Account(){
         }catch(error){
             console.error('Error logging out:', error);
         } 
-        
+         */
     }
 
     return (
