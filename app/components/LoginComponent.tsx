@@ -71,18 +71,20 @@ export default function LoginComponent() {
       console.log(error)
     }
 
-    const displayErrorMessage = () => {
+  }
 
-      if(!errorMessage || errorMessage == ''){
-          return null;
-      }
-  
-      return (
-        <div className="p-8 bg-slate-700">
-          <a className="text-bold text-white bg-transparent">Error: {errorMessage}</a>
-        </div>
-      );
+  const displayErrorMessage = () => {
+
+    if(!errorMessage || errorMessage == ''){
+        return null;
     }
+
+    return (
+      <div className="p-8 bg-slate-700">
+        <a className="text-bold text-white bg-transparent">Error: {errorMessage}</a>
+      </div>
+    );
+  }
   
   return (
       <>
@@ -125,4 +127,4 @@ export default function LoginComponent() {
           <Footer/>
     </>
   );
-}}
+}
