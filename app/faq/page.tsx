@@ -3,6 +3,7 @@
 import React from "react";
 import { useState } from "react";
 import Footer from "../components/Footer";
+import NavBar from "../components/NavBar";
 
 export default function Faq() {
   const [openAnswer, setOpenAnswer] = useState(false);
@@ -44,6 +45,7 @@ export default function Faq() {
 
   return (
     <>
+    <NavBar/>
       <div className="flex flex-col items-center relative lg:mt-12 py-8">
         <h2 className="font-bold text-xl lg:text-2xl self-center lg:mt-10 top-24">
           Frequently asked questions

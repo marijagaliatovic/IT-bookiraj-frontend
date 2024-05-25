@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import AccomodationItem from "../components/AccomodationItem";
 import contentfulService from "@/lib/.contentfulClient";
 import DateSearch from "../components/DateSearch";
@@ -6,12 +6,11 @@ import Footer from "../components/Footer";
 import Filter from "../components/Filter";
 import { apartmentsItem } from "@/lib/.contentfulClient";
 import { useEffect, useState } from "react";
+import NavBar from "../components/NavBar";
 
 const ApartmentListings = () => {
   const [apartments, setApartments] = useState<apartmentsItem[]>([]);
-  const [originalApartments, setOriginalApartments] = useState<
-    apartmentsItem[]
-  >([]);
+  const [originalApartments, setOriginalApartments] = useState<apartmentsItem[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -22,8 +21,7 @@ const ApartmentListings = () => {
         setOriginalApartments(data);
       } catch (error) {
         console.error("Error fetching data:", error);
-      } finally {
-        //executes whether it succeeds or we get an error
+      } finally { //executes whether it succeeds or we get an error
         setLoading(false);
       }
     };
@@ -36,30 +34,32 @@ const ApartmentListings = () => {
   };
 
   return (
-    <div className="flex flex-col gap-20 min-h-screen">
-      <div className="relative top-0 lg:top-24 flex flex-col w-full lg:max-content flex-grow">
-        <div className="flex flex-col items-center flex-grow">
-          <div className="flex lg:w-max w-max md:w-1/2 lg:flex-row flex-col justify-center items-center gap-2">
-            <DateSearch />
-            <Filter data={originalApartments} setData={handleSetData} />
+    <>
+      <NavBar/>
+      <div className="relative  flex flex-col justify-center items-center gap-20">
+        <div className="relative top-0 lg:top-24 flex flex-col h-max min-h-screen w-full">
+          <div className="flex flex-col items-center">
+            <div className="flex lg:w-max w-max md:w-1/2 lg:flex-row flex-col justify-center items-center gap-2">
+              <DateSearch />
+              <Filter data={originalApartments} setData={handleSetData} />
+            </div>
+            {loading ? (
+              <></>
+            ) : apartments.length === 0 ? (
+              <div className="lg:p-8 lg:mt-4 font-bold p-20 text-center">No apartments match the selected filters.</div>
+            ) : (
+                <div className="flex md:w-5/6 flex-col lg:flex-row flex-wrap items-center justify-center w-max lg:w-4/5 relative lg:mx-20 lg:mt-4 lg:items-stretch">
+                  {apartments.map((item, index) => (
+                    <AccomodationItem key={index} {...item} />
+                  ))}
+                </div>
+              
+            )}
           </div>
-          {loading ? (
-            <></>
-          ) : apartments.length === 0 ? (
-            <div className="lg:p-8 lg:mt-4 font-bold p-20 text-center">
-              No apartments match the selected filters.
-            </div>
-          ) : (
-            <div className="flex md:w-5/6 flex-col lg:flex-row flex-wrap items-center justify-center w-max lg:w-4/5 relative lg:mx-20 lg:mt-4 lg:items-stretch">
-              {apartments.map((item, index) => (
-                <AccomodationItem key={index} {...item} />
-              ))}
-            </div>
-          )}
         </div>
+        <Footer />
       </div>
-      <Footer />
-      </div>
+    </>
   );
 };
 

@@ -27,19 +27,20 @@ export default function SpecialOffers() {
  
   return (
     <>
-      <div className="bg-transparent flex flex-col items-center relative mt-0 lg:mt-12 lg:py-8 pb-4 ">
-        <h2 className="bg-transparent self-center font-bold not-italic text-xl lg:text-2xl mb-2 mt-4 lg:mt-10 ">
-          Special Offers
-        </h2>
-        <div className="small-line"></div>
-        <div className="bg-transparent flex flex-col md:w-5/6 lg:flex-row flex-wrap items-center justify-center w-max lg:w-4/5 relative lg:mx-20 lg:mt-4 lg:items-stretch">
-          {offers.map((offer, index) => (
-            <SpecialOfferItem key={index} {...offer} />
-          ))}
-        </div>
-        
+    <NavBar/>
+    <div className="bg-transparent flex flex-col items-center relative mt-0 lg:mt-12 lg:py-8 pb-4 ">
+      <h2 className="bg-transparent self-center font-bold not-italic text-xl lg:text-2xl mb-2 mt-4 lg:mt-10 ">
+        Special Offers
+      </h2>
+      <div className="small-line"></div>
+      <div className="bg-transparent flex flex-col md:w-5/6 lg:flex-row flex-wrap items-center justify-center w-max lg:w-4/5 relative lg:mx-20 lg:mt-4 lg:items-stretch">
+        {offers.map((offer, index) => (
+          <SpecialOfferItem key={index} {...offer} />
+        ))}
       </div>
-      <Footer/>
+      
+    </div>
+    <Footer/>
     </>
   );
 }
