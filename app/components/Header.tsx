@@ -17,7 +17,7 @@ export default function Header() {
         if(storedUser){
           const parsedUser = JSON.parse(storedUser)
           if(newUser != parsedUser.passport.user){
-            //console.log("parsedUser: ", parsedUser);
+            console.log("parsedUser: ", parsedUser);
             //userInfo(parsedUser.passport.user);
             setnewUser(parsedUser.passport.user);
             //renderFlag(true);
