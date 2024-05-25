@@ -52,12 +52,13 @@ export default function LoginComponent() {
         body: JSON.stringify(userValues) 
       })
 
-      const responseData = await response.json();
+      
       if (!response.ok) {
-        console.log('Login failed:', responseData.message);
-        setErrorMessage(responseData.message);
+        console.log('Login failed!');
+        setErrorMessage("Wrong email or password!");
       }
       else{
+        const responseData = await response.json();
         console.log("responseData from login" + JSON.stringify(responseData));
         localStorage.setItem('user', JSON.stringify(responseData));
         //userInfo(responseData); //Set the user to recived data
