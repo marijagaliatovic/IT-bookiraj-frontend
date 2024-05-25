@@ -14,7 +14,6 @@ export interface User {
 export default function LoginComponent() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMessage,setErrorMessage] = useState("");
   //const { user, rerenderFlag, userInfo, renderFlag } = useContext(UserContext);
   
 
@@ -51,12 +50,11 @@ export default function LoginComponent() {
         body: JSON.stringify(userValues) 
       })
 
-    const responseData = await response.json();
     if (!response.ok) {
-      console.error('Login failed:', responseData.message);
       throw new Error("Network response was not ok");
     }
 
+    const responseData = await response.json();
     console.log("responseData from login" + JSON.stringify(responseData));
     localStorage.setItem('user', JSON.stringify(responseData));
     //userInfo(responseData); //Set the user to recived data
@@ -68,7 +66,6 @@ export default function LoginComponent() {
     }catch(error){
       console.log(error)
     }
-
   
  }
   
