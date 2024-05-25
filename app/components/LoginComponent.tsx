@@ -81,11 +81,11 @@ export default function LoginComponent() {
 
     return (
       <div className="p-8 bg-slate-700">
-        <a className="text-bold text-white bg-transparent">Error: {errorMessage}</a>
+        <a className="text-bold text-center text-white bg-transparent">{errorMessage}</a>
       </div>
     );
   }
-  
+
   return (
       <>
       <div className="flex flex-col items-center relative lg:mt-12 py-8">
