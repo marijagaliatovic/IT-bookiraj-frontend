@@ -53,12 +53,14 @@ export default function LoginComponent() {
       })
 
       const responseData = await response.json();
+      console.log("responseData from login" + JSON.stringify(responseData));
       if (!response.ok) {
         console.log('Login failed:', responseData.message);
-        setErrorMessage(responseData.message);
+        setErrorMessage(responseData);
       }
+      
       else{
-        console.log("responseData from login" + JSON.stringify(responseData));
+        
         localStorage.setItem('user', JSON.stringify(responseData));
         //userInfo(responseData); //Set the user to recived data
         //renderFlag(true); //functions never executed
