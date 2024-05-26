@@ -15,6 +15,7 @@ const config: Config = {
       },
       color:{
         'gray_background':'#CACACA',
+        'almost_black' : '#070D0D',
       },
       screens: {
         'lg': '900px',

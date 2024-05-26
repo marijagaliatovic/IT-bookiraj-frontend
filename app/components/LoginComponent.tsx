@@ -3,6 +3,7 @@
 import Link from "@/node_modules/next/link"
 import { FormEvent, SetStateAction, useContext, useEffect, useState } from "react"
 import Footer from "./Footer"
+import { useRouter } from 'next/router'
 //import UserContext from "../UserContext"
 
 export interface User {
@@ -15,6 +16,7 @@ export default function LoginComponent() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const router = useRouter();
   //const { user, rerenderFlag, userInfo, renderFlag } = useContext(UserContext);
   
 
@@ -64,7 +66,8 @@ export default function LoginComponent() {
     //renderFlag(true); //functions never executed
   
     // Redirect to home page after successful login
-    window.location.href = '/'; //full page reload -> need to find better way, router not working
+    router.push('/');
+    //window.location.href = '/'; //full page reload -> need to find better way, router not working
 
     }catch(error){
       console.log(error)
