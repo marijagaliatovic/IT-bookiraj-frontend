@@ -64,7 +64,7 @@ export default function LoginComponent() {
     //renderFlag(true); //functions never executed
   
     // Redirect to home page after successful login
-    //window.location.href = '/'; //full page reload -> need to find better way, router not working
+    window.location.href = '/'; //full page reload -> need to find better way, router not working
 
     }catch(error){
       console.log(error)
