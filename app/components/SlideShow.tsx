@@ -30,7 +30,7 @@ export default function SlideShow()  {
                 key={index}
                 className={index === slideIndex ? "block" : "hidden"}
                 src={image}
-                width={800}
+                width={900}
                 priority
                 placeholder="blur"
                 alt={`Slide ${index + 1}`}

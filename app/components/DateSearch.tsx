@@ -41,10 +41,10 @@ const DateRange = () => {
 
   return (
      <div className="bg-white flex w-max lg:w-max md:w-full md:justify-around rounded-md lg:flex-row center items-center py-2 px-4 border lg:rounded-full cursor-pointer shadow-lg">
-        <div className="bg-white relative p-2 font-bold rounded-full border-r-4 cursor-pointer hover:underline"  >
+        <div className="bg-white relative p-2 font-bold rounded-full border-r-4 cursor-pointer hover:underline">
             <p className="bg-white"onClick={handleCheckInClick}>Dates</p>
         {
-            (isCheckInOpened && <DateRangePicker className="absolute z-10 -left-3/4 mt-6 customDataRangePicker  shadow-2xl " onChange={(item) => setState([item.selection])}
+            (isCheckInOpened && <DateRangePicker className="absolute md:w-full z-10 -left-3/4 mt-6 customDataRangePicker grow shadow-2xl " onChange={(item) => setState([item.selection])}
                 moveRangeOnFirstSelection={false} months={2} ranges={state} direction="vertical"/>)
         }
         
@@ -55,14 +55,9 @@ const DateRange = () => {
             {
                 (isGuestsOpened && (
                     <ul className="absolute z-10 mt-6 px-8 py-2 shadow-2xl w-16 bg-slate-400 flex flex-col items-center rounded-md">
-                      <li className="bg-slate-400 block px-4 rounded-md font-bold hover:bg-slate-200">1</li>
-                      <li className="bg-slate-400 block px-4 rounded-md font-bold hover:bg-slate-200">2</li>
-                      <li className="bg-slate-400 block px-4 rounded-md font-bold hover:bg-slate-200">3</li>
-                      <li className="bg-slate-400 block px-4 rounded-md font-bold hover:bg-slate-200">4</li>
-                      <li className="bg-slate-400 block px-4 rounded-md font-bold hover:bg-slate-200">5</li>
-                      <li className="bg-slate-400 block px-4 rounded-md font-bold hover:bg-slate-200">6</li>
-                      <li className="bg-slate-400 block px-4 rounded-md font-bold hover:bg-slate-200">7</li>
-                      <li className="bg-slate-400 block px-4 rounded-md font-bold hover:bg-slate-200">8</li>
+                      {[...Array(8)].map((_, index) => (
+                            <li key={index} className="bg-slate-400 block px-4 rounded-md font-bold hover:bg-slate-200">{index + 1}</li>
+                        ))}
                     </ul>
                   ))
             }

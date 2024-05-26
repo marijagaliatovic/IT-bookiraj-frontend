@@ -30,8 +30,8 @@ export default function SpecialOffers() {
         Special Offers
       </h2>
       <div className="small-line"></div>
-      <div className="bg-stone-200 lg:flex lg:gap-10 hidden lg:flex-row justify-center lg:w-4/5 lg:relative lg:mx-20 lg:mt-4 lg:items-strech">
-        {offers.slice(1,4).map((offer, index) => (
+      <div className="bg-stone-200 xl:hidden lg:flex lg:gap-10 hidden lg:flex-row justify-center lg:w-full lg:relative lg:mx-10 lg:mt-4 lg:items-strech">
+        {offers.slice(1,3).map((offer, index) => (
           <SpecialOfferItem key={index} {...offer} />
         ))}
       </div>
@@ -45,9 +45,14 @@ export default function SpecialOffers() {
           <SpecialOfferItem key={index} {...offer} />
         ))}
       </div>
+      <div className="bg-stone-200 lg:hidden md:hidden xl:flex xl:gap-10 hidden xl:flex-row justify-center xl:w-4/5 xl:relative xl:mx-20 xl:mt-4 xl:items-strech">
+        {offers.slice(1,4).map((offer, index) => (
+          <SpecialOfferItem key={index} {...offer} />
+        ))}
+      </div>
      
-      <div className="bg-transparent mt-4 w-full lg:ml-12 lg:w-2/3  flex justify-center lg:justify-end">
-          <i className="bg-gray-400 text-center not-italic text-sm lg:text-md font-bold hover:bg-slate-600 hover:text-slate-200 rounded-md  p-2 shadow-xl tracking-wide transition duration-300 ease-in-out"><Link href="/specialoffers" className="bg-transparent">View all</Link></i>
+      <div className="bg-transparent mt-4 w-full lg:w-1/2 xl:w-2/3 flex justify-center lg:justify-end lg:mr-0 xl:mr-0 grow">
+          <i className="bg-gray-400 text-center not-italic text-sm lg:text-md font-bold hover:bg-slate-600 hover:text-slate-200 rounded-md p-2 shadow-xl tracking-wide transition duration-300 ease-in-out"><Link href="/specialoffers" className="bg-transparent">View all</Link></i>
       </div>
     </div>
   );

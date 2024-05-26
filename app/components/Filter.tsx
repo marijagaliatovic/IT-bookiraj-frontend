@@ -129,7 +129,7 @@ export default function Filter({setData,data}:FilterProps){
                     {/* Dark overlay on the background when filters drowpdown is open */}
                     <div className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-20" onClick={handleFiltersClick}></div>
                     {/*Filters Dropdown */}
-                    <div  id="filterDropdown" className="bg-slate-400 absolute z-50 top-0 self-center flex flex-col lg:w-max w-7/8 h-min lg:h-max shadow-lg lg:p-4 rounded-md lg:m-5">
+                    <div  id="filterDropdown" className="bg-slate-400 absolute z-50 top-0 self-center flex flex-col md:w-1/2 lg:w-max w-7/8 h-min lg:h-max shadow-lg lg:p-4 rounded-md lg:m-5">
                         <div className="bg-transparent flex flex-row mx-10 py-4 items-center justify-start border-b-2 border-slate-200">
                             <div className="bg-transparent hover:bg-slate-200 rounded-full p-1" onClick={handleFiltersClick}><XMarkIcon className="w-4 h-4 bg-transparent" /></div>
                             <p className="bg-transparent font-bold flex-grow text-center">Filters</p>
@@ -145,7 +145,7 @@ export default function Filter({setData,data}:FilterProps){
                         </div>
                         <div className="bg-slate-400 flex flex-col my-2">
                             <span className="bg-slate-400 mx-10 my-1 font-bold tracking-wide">Number of rooms</span>
-                            <div className="bg-slate-500 p-4  rounded-md shadow-lg flex flex-col lg:flex-row mx-10 justify-around items-center gap-2 cursor-pointer">
+                            <div className="bg-slate-500 p-4  rounded-md shadow-lg flex flex-col md:flex-row mx-10 justify-around items-center gap-2 cursor-pointer">
                                 <span className={`shadow-2xl p-2 w-3/4 rounded-md text-center ${numberOfRooms === 4 ? 'bg-white' : 'bg-slate-400'}`} onClick={()=>{handleNumberOfRoomsClick(4)}}>Any</span>
                                 <span className={`shadow-2xl p-2 w-3/4 rounded-md text-center ${numberOfRooms === 0 ? 'bg-white' : 'bg-slate-400'}`} onClick={()=>{handleNumberOfRoomsClick(0)}}>0</span>
                                 <span className={`shadow-2xl p-2 w-3/4 rounded-md text-center ${numberOfRooms === 1 ? 'bg-white' : 'bg-slate-400'}`} onClick={()=>{handleNumberOfRoomsClick(1)}}>1</span>

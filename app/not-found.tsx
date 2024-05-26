@@ -14,7 +14,7 @@ export default function NotFound(){
                        <Link className="bg-transparent" href="/">Go back Home!</Link>
                     </i>
                 </div>
-                <Image className="self-start lg:ml-96 md:ml-28 md:h-1/3 h-1/2 md:w-1/2 w-2/3 lg:w-80 lg:h-60 my-4 lg:mb-0" alt="Not Found" height ={200} width = {300} src= {tom}></Image>
+                <Image className="self-start lg:lg-96 md:lg-28 md:h-1/3 h-1/2 md:w-1/2 w-2/3 lg:w-80 lg:h-60 my-4 lg:mb-0" alt="Not Found" height ={200} width = {300} src= {tom}></Image>
             </div>
             <Footer/>
         </main>

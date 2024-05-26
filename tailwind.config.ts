@@ -15,11 +15,11 @@ const config: Config = {
       },
       color:{
         'gray_background':'#CACACA',
-        'almost_black' : '#070D0D',
       },
       screens: {
+        'xl': '1400px',
         'lg': '900px',
-        'md': '500px',
+        'md': '550px',
       },
     },
   },
