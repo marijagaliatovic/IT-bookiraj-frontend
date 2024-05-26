@@ -1,9 +1,9 @@
 "use client"
 
-import Link from "@/node_modules/next/link"
+import Link from "next/link"
 import { FormEvent, SetStateAction, useContext, useEffect, useState } from "react"
 import Footer from "./Footer"
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 //import UserContext from "../UserContext"
 
 export interface User {
