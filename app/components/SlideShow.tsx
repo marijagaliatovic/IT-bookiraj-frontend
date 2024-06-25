@@ -1,35 +1,33 @@
 "use client"
 import React, { useState } from "react";
-import Image from "next/image";
-
-import image1 from "@/public/images/slika_sobe_1.jpg";
-import image2 from "@/public/images/slika_sobe_2.jpg";
-import image3 from "@/public/images/slika_sobe_3.jpg";
+import Image, { StaticImageData } from "next/image";
+import { apartmentPhotos } from "@/lib/.contentfulClient";
 
 interface slideShowProps {
-  images : string[];
+  images : apartmentPhotos[];
 }
 
-export default function SlideShow()  {
-  const images = [image1,image2,image3];
+export default function SlideShow(props:slideShowProps)  {
+  //const images = [image1,image2,image3];
 
+  const AllImages = [props.images]; ///fix this 
   const [slideIndex, setSlideIndex] = useState(0);
 
   const prevSlide = () => {
-    setSlideIndex((slideIndex - 1 + images.length) % images.length);
+    setSlideIndex((slideIndex - 1 + props.images.length) % props.images.length);
   };
 
   const nextSlide = () => {
-    setSlideIndex((slideIndex + 1) % images.length);
+    setSlideIndex((slideIndex + 1) % props.images.length);
   };
 
   return (
     <div className="bg-white relative w-full basis-6/12 p-0 lg:p-8 lg:m-4">
-            {images.map((image, index) => (
+            {props.images.map((image, index) => (
             <Image
                 key={index}
                 className={index === slideIndex ? "block" : "hidden"}
-                src={image}
+                src={image.images.room1.url}
                 width={900}
                 priority
                 placeholder="blur"
