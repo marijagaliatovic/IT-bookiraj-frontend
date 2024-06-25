@@ -35,25 +35,17 @@ const gqAllApartmentsQuery = `query getAllApartments{
   }`;
 
   const gqAllApartmentsPhotos = `query getAllApartmentPhotos {
-  apartmentsCollection {
-    items {
-        images {
-            room1 {
-                title
-                url
-            }
-            br1 {
-                title
-                url
-            }
-            lr1 {
-                title
-                url
-            }
+  apartmentsCollection(where: {title: "Apartment Nora"}){
+      items {
+        imagesCollection{
+          items{
+            title
+            url
+          }
         }
         title
+      }
     }
-  }
 }`;
 
 export interface apartmentsCollectionResponse {
@@ -76,28 +68,24 @@ export interface apartmentsItem{
 }
 
 
-export interface apartmentPhotosCollection {
+export interface apartmentItemCollection {
     apartmentsCollection: {
-      items: apartmentPhotos[];
+      items: apartmentItem[];
     };
   }
   
-  export interface apartmentPhotos {
-    images: {
-      room1: {
-        title: string;
-        url: string;
-      };
-      br1: {
-        title: string;
-        url: string;
-      };
-      lr1: {
-        title: string;
-        url: string;
-      };
-    };
+export  interface apartmentItem {
+    imagesCollection: imagesCollection;
     title:string;
+  }
+
+export interface imagesCollection {
+  items: imageItem[]; 
+}
+
+export interface imageItem {
+    title: string;
+    url: string;
   }
 
 const baseUrl = `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}/environments/master`;
@@ -167,7 +155,7 @@ const getAllSpecialoffers = async():Promise<apartmentsItem[]> =>{
     }
 };
 
-const getAllPhotos = async (): Promise<apartmentPhotos[]> => {
+const getAllPhotos = async (): Promise<apartmentItem[]> => {
     try {
       const response = await fetch(baseUrl, {
         method: 'POST',
@@ -177,16 +165,20 @@ const getAllPhotos = async (): Promise<apartmentPhotos[]> => {
         },
         body: JSON.stringify({ query: gqAllApartmentsPhotos }),
       });
-      const body = (await response.json()) as { data: apartmentPhotosCollection };
-  
-      const apartmentsPhotosCollection = body.data.apartmentsCollection.items.map(
+      
+      const body = (await response.json()) as { data: apartmentItemCollection };
+      console.log("response.body: " + body.data.apartmentsCollection.items[0].imagesCollection.items[0].title);
+
+      const apartmentsItemCollection = body.data.apartmentsCollection.items.map(
         (item) => ({
-          images: item.images,
+          imagesCollection: item.imagesCollection,
           title: item.title
         })
       );
-  
-      return apartmentsPhotosCollection;
+      
+      console.log("apartmentaItemCollection: " + apartmentsItemCollection[0].imagesCollection.items[0].title);
+
+      return apartmentsItemCollection;
     } catch (error) {
       console.error("Error fetching apartment photos:", error);
       return [];
