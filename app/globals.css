@@ -18,7 +18,7 @@
 
 *{
   background-color: rgb(202, 202, 202);
-  color:rgb(0, 0, 0);
+  color:rgb(45, 45, 45);
 }
 
 body {
@@ -29,9 +29,10 @@ body {
 .small-line {
   width: 50px;
   height: 2px; 
-  background-color: #000; 
+  background-color: rgb(0, 66, 66); 
   margin-top: 5px;
   margin-bottom:10px;
+
 }
 
 .rdrDefinedRangesWrapper {
@@ -43,7 +44,10 @@ span{
   font-weight: bold;
 }
 
-
+.customDataRangePicker .rdrMonthsVerticals{
+  display:flex;
+  flex-direction: flex-row;
+}
 .customDataRangePicker .rdrDateDisplayWrapper{
   background-color: rgb(148 163 184);
 }

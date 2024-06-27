@@ -1,5 +1,3 @@
-import { space } from "postcss/lib/list";
-import { title } from "process";
 
 const gqAllReviewsQuery = `query getAllReviews{
     reviewsCollection {
@@ -18,13 +16,13 @@ const gqAllReviewsQuery = `query getAllReviews{
   }
 `;
 
-interface reviewsCollectionResponse {
+export interface reviewsCollectionResponse {
     reviewsCollection: {
         items: reviewsItem[];
     }
 }
 
-interface reviewsItem{
+export interface reviewsItem{
     picture:{
         title:string;
         url:string;
@@ -60,6 +58,7 @@ const getAllReviews = async (): Promise<reviewsItem[]> => {
             stars:item.stars,
             text:item.text
         }));
+        
         return reviewsCollection;
     } catch(error){
         console.error("Error fetching reviews:", error);

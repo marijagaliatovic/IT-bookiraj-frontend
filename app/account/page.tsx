@@ -80,7 +80,7 @@ export default function Account(){
 
     return (
         <>
-            <NavBar />
+            <NavBar/>
             <div className="flex flex-col items-center relative lg:mt-12 py-8">
                 <h2 className="font-bold text-xl lg:text-2xl self-center lg:mt-10 top-24">User</h2>
                 <div className="small-line"></div>

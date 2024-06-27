@@ -1,229 +1,242 @@
-
-const gqAllApartmentsQuery = `query getAllApartments{
-    apartmentsCollection {
-      items {
-        picture{
-            title
-            url
-        }
+const gqAllApartmentsQuery = `query getAllApartments {
+  apartmentsCollection {
+    items {
+      apartmentId
+      picture {
         title
-        location
-        size
-        priceNumber
-        apartment
-        specialOffer
-        apartmentId
+        url
       }
-    }
-  }
-`;
-
- const gqAllSpecialOffersQuery = `query getAllSpecialoffers{
-    apartmentsCollection(where: {specialOffer_not_in : 0}) {
-      items {
-        picture{
-            title
-            url
+      title
+      location
+      size
+      priceNumber
+      apartment
+      specialOffer
+      imagesCollection {
+        items {
+          url
+          title
         }
-        title
-        location
-        size
-        priceNumber
-        apartment
-        specialOffer
-        apartmentId
       }
-    }
-  }`;
-
-const gqAllApartmentsPhotos = `query getAllApartmentPhotos($apartmentId:String){
-  apartmentsCollection(where: {apartmentId: $apartmentId}){
-     items {
-        picture{
-            title
-            url
-        }
-        imagesCollection{
-          items{
-            title
-            url
-          }
-        }
-        title
-        location
-        size
-        priceNumber
-        apartment
-        specialOffer
-        apartmentId
     }
   }
 }`;
 
-export interface apartmentsCollectionResponse {
-    apartmentsCollection: {
-        items: apartmentsItem[];
+const getApartmentByIdQuery =  `query getApartmentById ($apartmentId:String) {
+  apartmentsCollection(where : {apartmentId:$apartmentId}){
+    items {
+      picture {
+        title
+        url
+      }
+      title
+      location
+      size
+      priceNumber
+      apartment
+      specialOffer
+      apartmentId
+      imagesCollection {
+        items {
+          url
+          title
+        }
+      }
     }
-}
-
-export interface apartmentsItem{
-    picture:{
-        title:string;
-        url:string;
-      }
-      title:string;
-      location:string;
-      size:string;
-      priceNumber:number;
-      apartment:boolean;
-      specialOffer:number;
-      apartmentId:string;
-}
-
-
-export interface apartmentItemCollection {
-    apartmentsCollection: {
-      items: apartmentItem[];
-    };
   }
-  
-export  interface apartmentItem {
-    imagesCollection: imagesCollection;
-    picture:{
-        title:string;
-        url:string;
+}`
+
+
+const gqAllSpecialOffersQuery = `query getAllSpecialoffers {
+  apartmentsCollection(where: {specialOffer_not_in: 0}) {
+    items {
+      sys {
+        id
       }
-      title:string;
-      location:string;
-      size:string;
-      priceNumber:number;
-      apartment:boolean;
-      specialOffer:number;
-      apartmentId:string;
+      picture {
+        title
+        url
+      }
+      title
+      location
+      size
+      priceNumber
+      apartment
+      specialOffer
+      apartmentId
+      imagesCollection {
+        items {
+          url
+          title
+        }
+      }
+    }
   }
+}`;
+
+const gqAllApartmentPhotos = `query getAllApartmentPhotos($apartmentId:String){
+  apartmentsCollection(where: {apartmentId: $apartmentId}){
+    items{
+     imagesCollection{
+          items{
+            title
+            url
+          }
+        } 
+    }
+  }
+}`;
+
+export interface images {
+  title: string;
+  url: string;
+}
 
 export interface imagesCollection {
-  items: imageItem[]; 
+  items: images[];
 }
 
-export interface imageItem {
+export interface apartmentsItem {
+  apartmentId: string;
+  picture: {
     title: string;
     url: string;
-  }
+  };
+  title: string;
+  location: string;
+  size: string;
+  priceNumber: number;
+  apartment: boolean;
+  specialOffer: number;
+  imagesCollection: imagesCollection ; 
+}
+
+
+export interface ApartmentsCollectionResponse {
+  apartmentsCollection: {
+    items: {
+      apartmentId: string;
+      picture: {
+        title: string;
+        url: string;
+      };
+      title: string;
+      location: string;
+      size: string;
+      priceNumber: number;
+      apartment: boolean;
+      specialOffer: number;
+      imagesCollection: imagesCollection;
+    }[];
+  };
+}
 
 const baseUrl = `https://graphql.contentful.com/content/v1/spaces/${process.env.CONTENTFUL_SPACE_ID}/environments/master`;
 
+const getAllApartments = async (): Promise<apartmentsItem[]> => {
+  try {
+    const response = await fetch(baseUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
+      },
+      body: JSON.stringify({ query: gqAllApartmentsQuery }),
+    });
+    const body = (await response.json()) as { data: ApartmentsCollectionResponse };
 
-const getAllApartments =async (): Promise<apartmentsItem[]> => {
-    try{
-        const response = await fetch(baseUrl, {
-            method:'POST',
-            headers:{
-                'Content-Type':'application/json',
-                Authorization:`Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
-            },
-            body:JSON.stringify({query:gqAllApartmentsQuery}),
-        });
-        const body = (await response.json()) as {data: apartmentsCollectionResponse}
-
-        const apartmentsCollection = body.data.apartmentsCollection.items.map(
-            (item)=>({
-            title:item.title,
-            picture:item.picture,
-            location:item.location,
-            size:item.size,
-            priceNumber:item.priceNumber,
-            apartment:item.apartment,
-            specialOffer:item.specialOffer,
-            apartmentId:item.apartmentId
-        }));
-
-        return apartmentsCollection;
-    } catch(error){
-        console.error("Error fetching apartments:", error);
-        return [];
-    }
+    return body.data.apartmentsCollection.items;
+  } catch (error) {
+    console.error("Error fetching apartments:", error);
+    return [];
+  }
 };
 
-const getAllSpecialoffers = async():Promise<apartmentsItem[]> =>{
-    try{
-        const response = await fetch(baseUrl, {
-            method:'POST',
-            headers:{
-                'Content-Type':'application/json',
-                Authorization:`Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
-        },
-            body:JSON.stringify({query:gqAllSpecialOffersQuery})
-        });
+const getAllSpecialoffers = async (): Promise<apartmentsItem[]> => {
+  try {
+    const response = await fetch(baseUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
+      },
+      body: JSON.stringify({ query: gqAllSpecialOffersQuery }),
+    });
 
-        const body = (await response.json()) as {data: apartmentsCollectionResponse}
+    const body = (await response.json()) as { data: ApartmentsCollectionResponse };
 
-        const apartmentsCollection = body.data.apartmentsCollection.items.map(
-            (item)=>({
-            title:item.title,
-            picture:item.picture,
-            location:item.location,
-            size:item.size,
-            priceNumber:item.priceNumber,
-            apartment:item.apartment,
-            specialOffer:item.specialOffer,
-            apartmentId:item.apartmentId
-        }));
-
-        
-        return apartmentsCollection;
-
-    }catch(error){
-        console.error("Error fetching apartments:", error);
-        return [];
-    }
+    return body.data.apartmentsCollection.items;
+  } catch (error) {
+    console.error("Error fetching special offers:", error);
+    return [];
+  }
 };
 
-const getAllPhotos = async (apartmentId:string): Promise<apartmentItem[]> => {
- 
-    try {
-      const response = await fetch(baseUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
-        },
-        body: JSON.stringify({ 
-          query: gqAllApartmentsPhotos ,
-          variables: { apartmentId: apartmentId },})
+const getApartmentById = async (id: string): Promise<apartmentsItem | null> => {
+  console.log("getApartmentById: ", id);
+  try {
+    const response = await fetch(baseUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
+      },
+      body: JSON.stringify({ query: getApartmentByIdQuery, variables: { apartmentId: id } }),
+    });
 
-      });
-      
-      const body = (await response.json()) as { data: apartmentItemCollection };
-      console.log("Body getAllPhotos: ", body);
-      const apartmentsItemCollection = body.data.apartmentsCollection.items.map(
-        (item) => ({
-            imagesCollection: item.imagesCollection,
-            title: item.title,
-            picture:item.picture,
-            location:item.location,
-            size:item.size,
-            priceNumber:item.priceNumber,
-            apartment:item.apartment,
-            specialOffer:item.specialOffer,
-            apartmentId:item.apartmentId
-        })
-      );
-      
-      console.log("apartmentaItemCollection: " + apartmentsItemCollection[0].imagesCollection.items[0].title);
-
-      return apartmentsItemCollection;
-    } catch (error) {
-      console.error("Error fetching apartment photos:", error);
-      return [];
+    const body = await response.json();
+    
+    // Provjeri postoji li polje data i apartmentsCollection u odgovoru
+    if (body.data && body.data.apartmentsCollection && body.data.apartmentsCollection.items.length > 0) {
+      // Vrati prvi pronađeni stan
+      return body.data.apartmentsCollection.items[0];
+    } else {
+      // Ako nema podataka, vrati null
+      return null;
     }
-  };
+  } catch (error) {
+    console.error("Error fetching apartment by ID:", error);
+    return null;
+  }
+};
+
+const getAllPhotos = async (apartmentId:string): Promise<imagesCollection | undefined> => {
+  console.log("getAllPhotos: ", apartmentId);
+  try {
+    const response = await fetch(baseUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
+      },
+      body: JSON.stringify({ 
+        query: gqAllApartmentPhotos ,
+        variables: { apartmentId: apartmentId },})
+
+    });
+    
+    const body = (await response.json()) as { data: ApartmentsCollectionResponse };
+   
+    const imagesCollection = body.data.apartmentsCollection.items[0].imagesCollection;
+    
+    if (body.data && body.data.apartmentsCollection && body.data.apartmentsCollection.items.length > 0) {
+    return imagesCollection;
+    }
+    else{
+      return undefined;
+    }
+  } catch (error) {
+    console.error("Error fetching apartment photos:", error);
+    return undefined;
+  }
+};
 
 const contentfulService = {
-    getAllApartments,
-    getAllSpecialoffers,
-    getAllPhotos
-}
+  getAllApartments,
+  getAllSpecialoffers,
+  getApartmentById,
+  getAllPhotos
+};
 
 export default contentfulService;
 

@@ -37,8 +37,8 @@ const ReviewItem = (item: review) => {
     return starElements;
   };
   return (
-    <div className="bg-stone-200 top-0 flex flex-col items-center relative m-8 lg:m-4 lg:w-1/4 lg:p-4">
-      <div className="bg-stone-200 flex flex-row justify-center gap-3 pt-5">
+    <div className="bg-stone-200 top-0 flex flex-col items-center relative m-8 lg:m-4 lg:p-4 lg:w-1/4">
+      <div className="bg-stone-200 flex flex-row justify-center gap-2 pt-5">
         <Image
           className="bg-stone-200 rounded-full self-start"
           height={50}
@@ -61,7 +61,7 @@ const ReviewItem = (item: review) => {
           </div>
         </div>
       </div>
-      <p className="bg-stone-200 text-center text-xs px-3 m-3 lg:font-bold">
+      <p className="bg-stone-200 text-left text-xs px-3 m-3">
         {item.text}
       </p>
     </div>
