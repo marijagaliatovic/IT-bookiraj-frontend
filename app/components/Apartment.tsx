@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import SlideShow from "@/app/components/SlideShow";
 import BookNow from "@/app/components/BookNow";
 import contentfulService, { imagesCollection } from "@/lib/.contentfulClient";
+import NavBar from "./NavBar";
 
 type ApartmentProps = {
   apartment: {
@@ -49,7 +50,7 @@ const Apartment = ({ apartment }: ApartmentProps) => {
 
   return (
     <>
-      
+      <NavBar/>
       <div className="bg-white mb-20 pt-5 pb-10 mx-5 rounded-md mt-32 md:mx-auto w-1/2 px-10">
         <div className="mx-auto bg-white">
           <SlideShow images={allApartmentPhotos}/>
