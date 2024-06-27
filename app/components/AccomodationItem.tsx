@@ -1,4 +1,6 @@
+import { imagesCollection } from "@/lib/.contentfulClient";
 import Image from "next/image";
+import Link from "next/link";
 
 interface accomodation{
     picture:{
@@ -11,11 +13,15 @@ interface accomodation{
     priceNumber:number;
     apartment:boolean;
     specialOffer:number;
+    apartmentId:string;
 }
 
 const AccomodationItem = (item:accomodation) => {
+    console.log("Item: " , item.apartmentId);
   return (
+            
             <div className="top-0 w-full xl:w-1/4 lg:w-1/3 md:w-1/2 bg-white flex flex-col justify-around items-center lg:m-4 my-4 hover:shadow-2xl">
+                <Link href={`apartmentlistings/${item.apartmentId}`}>
                  <div className="bg-white relative mt-6 lg:w-4/5 w-3/4  md:h-44 h-36 lg:h-44">
                     <Image  fill={true} src={item.picture.url} alt={item.picture.title} />
                 </div>
@@ -35,6 +41,7 @@ const AccomodationItem = (item:accomodation) => {
                         </div>
                     </div>
                 </div>
+                </Link>
             </div>
   );
 };

@@ -3,11 +3,7 @@
 import Link from "next/link";
 import SlideShow from "./SlideShow";
 
-import image1 from "@/public/images/slika_sobe_1.jpg";
-import image2 from "@/public/images/slika_sobe_2.jpg";
-import image3 from "@/public/images/slika_sobe_3.jpg";
-
-import contentfulService, { apartmentItem, imageItem, imagesCollection } from "@/lib/.contentfulClient";
+import contentfulService, { apartmentItem } from "@/lib/.contentfulClient";
 import { useEffect, useState } from "react";
 
 export default function HeroSection(){ 
@@ -17,7 +13,7 @@ export default function HeroSection(){
 
   useEffect(()=>{ const fetchData = async () => {
     try {
-      const data = await contentfulService.getAllPhotos();
+      const data = await contentfulService.getAllPhotos("1");
       setImagesAllApartments(data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -47,7 +43,7 @@ export default function HeroSection(){
 
             {!loading && filteredApartment ? (
           <SlideShow images={filteredApartment.imagesCollection} />
-        ) : (<p></p>)}
+        ) : (<p>Loading</p>)}
         </div>
 
         

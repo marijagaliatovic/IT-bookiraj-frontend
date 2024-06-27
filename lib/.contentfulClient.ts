@@ -12,6 +12,7 @@ const gqAllApartmentsQuery = `query getAllApartments{
         priceNumber
         apartment
         specialOffer
+        apartmentId
       }
     }
   }
@@ -30,13 +31,18 @@ const gqAllApartmentsQuery = `query getAllApartments{
         priceNumber
         apartment
         specialOffer
+        apartmentId
       }
     }
   }`;
 
-  const gqAllApartmentsPhotos = `query getAllApartmentPhotos {
-  apartmentsCollection(where: {title: "Apartment Nora"}){
-      items {
+const gqAllApartmentsPhotos = `query getAllApartmentPhotos($apartmentId:String){
+  apartmentsCollection(where: {apartmentId: $apartmentId}){
+     items {
+        picture{
+            title
+            url
+        }
         imagesCollection{
           items{
             title
@@ -44,8 +50,14 @@ const gqAllApartmentsQuery = `query getAllApartments{
           }
         }
         title
-      }
+        location
+        size
+        priceNumber
+        apartment
+        specialOffer
+        apartmentId
     }
+  }
 }`;
 
 export interface apartmentsCollectionResponse {
@@ -65,6 +77,7 @@ export interface apartmentsItem{
       priceNumber:number;
       apartment:boolean;
       specialOffer:number;
+      apartmentId:string;
 }
 
 
@@ -76,7 +89,17 @@ export interface apartmentItemCollection {
   
 export  interface apartmentItem {
     imagesCollection: imagesCollection;
-    title:string;
+    picture:{
+        title:string;
+        url:string;
+      }
+      title:string;
+      location:string;
+      size:string;
+      priceNumber:number;
+      apartment:boolean;
+      specialOffer:number;
+      apartmentId:string;
   }
 
 export interface imagesCollection {
@@ -111,10 +134,10 @@ const getAllApartments =async (): Promise<apartmentsItem[]> => {
             size:item.size,
             priceNumber:item.priceNumber,
             apartment:item.apartment,
-            specialOffer:item.specialOffer
+            specialOffer:item.specialOffer,
+            apartmentId:item.apartmentId
         }));
 
-        
         return apartmentsCollection;
     } catch(error){
         console.error("Error fetching apartments:", error);
@@ -143,7 +166,8 @@ const getAllSpecialoffers = async():Promise<apartmentsItem[]> =>{
             size:item.size,
             priceNumber:item.priceNumber,
             apartment:item.apartment,
-            specialOffer:item.specialOffer
+            specialOffer:item.specialOffer,
+            apartmentId:item.apartmentId
         }));
 
         
@@ -155,7 +179,8 @@ const getAllSpecialoffers = async():Promise<apartmentsItem[]> =>{
     }
 };
 
-const getAllPhotos = async (): Promise<apartmentItem[]> => {
+const getAllPhotos = async (apartmentId:string): Promise<apartmentItem[]> => {
+ 
     try {
       const response = await fetch(baseUrl, {
         method: 'POST',
@@ -163,16 +188,25 @@ const getAllPhotos = async (): Promise<apartmentItem[]> => {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
         },
-        body: JSON.stringify({ query: gqAllApartmentsPhotos }),
+        body: JSON.stringify({ 
+          query: gqAllApartmentsPhotos ,
+          variables: { apartmentId: apartmentId },})
+
       });
       
       const body = (await response.json()) as { data: apartmentItemCollection };
-      console.log("response.body: " + body.data.apartmentsCollection.items[0].imagesCollection.items[0].title);
-
+      console.log("Body getAllPhotos: ", body);
       const apartmentsItemCollection = body.data.apartmentsCollection.items.map(
         (item) => ({
-          imagesCollection: item.imagesCollection,
-          title: item.title
+            imagesCollection: item.imagesCollection,
+            title: item.title,
+            picture:item.picture,
+            location:item.location,
+            size:item.size,
+            priceNumber:item.priceNumber,
+            apartment:item.apartment,
+            specialOffer:item.specialOffer,
+            apartmentId:item.apartmentId
         })
       );
       
