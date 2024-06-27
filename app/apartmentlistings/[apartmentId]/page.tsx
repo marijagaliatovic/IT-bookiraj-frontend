@@ -149,10 +149,7 @@
 // export default Apartment;
 
 import React from "react";
-import SlideShow from "@/app/components/SlideShow";
 import Footer from "@/app/components/Footer";
-import DateRange from "@/app/components/DateSearch";
-import BookNow from "@/app/components/BookNow";
 import contentfulService from "@/lib/.contentfulClient";
 import Apartment from "@/app/components/Apartment";
 
