@@ -2,9 +2,6 @@
 
 import Image from "next/image";
 import Link from "@/node_modules/next/link";
-import Apartment from "../apartmentlistings/[apartmentId]/page";
-import contentfulService, { apartmentsItem } from "@/lib/.contentfulClient";
-
 
 export interface images {
   title: string;
