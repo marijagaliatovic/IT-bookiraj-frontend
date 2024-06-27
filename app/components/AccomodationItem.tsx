@@ -2,6 +2,9 @@
 
 import Image from "next/image";
 import Link from "@/node_modules/next/link";
+import Apartment from "../apartmentlistings/[apartmentId]/page";
+import contentfulService, { apartmentsItem } from "@/lib/.contentfulClient";
+
 
 export interface images {
   title: string;
@@ -29,7 +32,7 @@ export interface accomodation {
 
 const AccomodationItem = (item: accomodation) => {
   return (
-    <div className="top-0 w-full lg:w-1/4 rounded-md md:w-1/2  bg-white flex flex-col justify-around items-center lg:m-4 my-4 hover:shadow-2xl">
+    <div className="top-0 w-full xl:w-1/4 lg:w-1/3 ml:w-1/4 rounded-md md:w-1/2  bg-white flex flex-col justify-around items-center lg:m-4 my-4 hover:shadow-2xl">
       <div className="bg-white relative mt-6 lg:w-4/5 w-3/4  md:h-44 h-36 lg:h-44">
         <Image fill={true} src={item.picture.url} alt={item.picture.title} />
       </div>

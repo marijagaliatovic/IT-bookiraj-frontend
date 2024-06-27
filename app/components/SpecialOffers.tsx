@@ -30,21 +30,25 @@ export default function SpecialOffers() {
         Special Offers
       </h2>
       <div className="small-line"></div>
+      {/*lg*/}
       <div className="bg-stone-200 xl:hidden lg:flex lg:gap-10 hidden lg:flex-row justify-center lg:w-full lg:relative lg:mx-10 lg:mt-4 lg:items-strech">
         {offers.slice(1,3).map((offer, index) => (
           <SpecialOfferItem key={index} {...offer} />
         ))}
       </div>
-      <div className="bg-stone-200 md:3/4 hidden md:flex md:flex-row md:justify-center md:gap-5 lg:hidden ">
-        {offers.slice(1,3).map((offer, index) => (
-          <SpecialOfferItem key={index} {...offer} />
-        ))}
-      </div>
-      <div className="bg-stone-200 w-3/4 lg:hidden md:hidden justify-center ">
+      {/*md*/}
+      <div className="bg-stone-200 md:w-4/5 hidden md:flex md:flex-row md:justify-center md:gap-6 lg:hidden ">
         {offers.slice(1,2).map((offer, index) => (
           <SpecialOfferItem key={index} {...offer} />
         ))}
       </div>
+      {/*s*/}
+      <div className="bg-stone-200 w-3/5 lg:hidden md:hidden justify-center ">
+        {offers.slice(1,2).map((offer, index) => (
+          <SpecialOfferItem key={index} {...offer} />
+        ))}
+      </div>
+      {/*xl*/}
       <div className="bg-stone-200 lg:hidden md:hidden xl:flex xl:gap-10 hidden xl:flex-row justify-center xl:w-4/5 xl:relative xl:mx-20 xl:mt-4 xl:items-strech">
         {offers.slice(1,4).map((offer, index) => (
           <SpecialOfferItem key={index} {...offer} />
