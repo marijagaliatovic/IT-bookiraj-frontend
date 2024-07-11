@@ -1,10 +1,11 @@
 import Link from "@/node_modules/next/link";
 import ReviewItem from "./ReviewItem";
-import getTwoReviews from "@/lib/cotentfulTwoReviews";
 import Footer from "./Footer";
+import getReviews from "@/lib/contentfulAllReviews";
+
 
 const Reviews = async () => {
-  const reviews = await getTwoReviews();
+  const reviews = await getReviews.getTwoReviews();
 
   return (
       <div className="bg-gray-400 flex flex-col items-center relative lg:mt-12 py-8">
@@ -39,3 +40,7 @@ const Reviews = async () => {
 };
 
 export default Reviews;
+
+function getTwoReviews() {
+  throw new Error("Function not implemented.");
+}

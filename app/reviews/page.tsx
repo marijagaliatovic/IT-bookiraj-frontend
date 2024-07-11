@@ -1,7 +1,6 @@
 "use client";
 import Footer from "../components/Footer";
 import ReviewItem from "../components/ReviewItem";
-import getAllReviews from "@/lib/contentfulUtils";
 import { useEffect, useState } from "react";
 import getReviews, { reviewsItem } from "@/lib/contentfulAllReviews";
 import NavBar from "../components/NavBar";
