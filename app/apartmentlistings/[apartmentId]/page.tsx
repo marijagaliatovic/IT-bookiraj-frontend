@@ -5,6 +5,7 @@ import DateRange from "@/app/components/DateSearch";
 import BookNow from "@/app/components/BookNow";
 import contentfulService from "@/lib/.contentfulClient";
 import Apartment from "@/app/components/Apartment";
+import NavBar from "@/app/components/NavBar";
 
 type Params = {
   params: {
@@ -21,6 +22,8 @@ const ApartmentPage = async ({ params }: Params) => {
   }
 
   return (
+    <>
+    <NavBar/>
     <div className="flex flex-col min-h-screen">
       <div className="w-full lg:max-content flex-grow">
       <Apartment key={apartmentId} apartment={{
@@ -39,6 +42,7 @@ const ApartmentPage = async ({ params }: Params) => {
       </div>
       <Footer />
     </div>
+    </>
   );
 };
 
