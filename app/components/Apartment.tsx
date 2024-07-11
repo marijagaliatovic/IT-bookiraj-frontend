@@ -126,7 +126,7 @@ const Apartment = ({ apartment }: ApartmentProps) => {
           </svg>
         </button>
         {openAmenities && (
-          <div className="bg-white flex flex-wrap gap-3 md:ml-10 mb-4 md:mb-10">
+          <div className="bg-white flex flex-wrap ml-4 gap-3 md:ml-10 mb-4 md:mb-10">
             {whatWeOffer.map((offer, index) => (
               <div key={index} className="bg-white p-2 border text-sm rounded">
                 {offer}
