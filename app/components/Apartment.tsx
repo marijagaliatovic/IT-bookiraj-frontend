@@ -5,7 +5,8 @@ import SlideShow from "@/app/components/SlideShow";
 import BookNow from "@/app/components/BookNow";
 import ReviewItem from "./ReviewItem";
 import contentfulService, { apartmentsItem, imagesCollection } from "@/lib/.contentfulClient";
-import getReviews, { reviewsItem } from "@/lib/.contentfulAllReviews";
+import getReviews, { reviewsItem } from "@/lib/contentfulAllReviews";
+
 
 type ApartmentProps = {
   apartment: apartmentsItem;
