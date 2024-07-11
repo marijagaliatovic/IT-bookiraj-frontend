@@ -28,7 +28,8 @@ export default function SpecialOffers() {
   return (
     <>
     <NavBar/>
-    <div className="bg-transparent flex flex-col items-center relative mt-0 lg:mt-12 lg:py-8 pb-4 ">
+    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col items-center relative lg:mt-12 py-8 w-full lg:max-content flex-grow">
       <h2 className="bg-transparent self-center font-bold not-italic text-xl lg:text-2xl mb-2 mt-4 lg:mt-10 ">
         Special Offers
       </h2>
@@ -41,6 +42,7 @@ export default function SpecialOffers() {
       
     </div>
     <Footer/>
+    </div>
     </>
   );
 }
