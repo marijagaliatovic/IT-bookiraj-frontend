@@ -12,19 +12,21 @@ const Reviews = async () => {
             Reviews
           </h2>
           <div className="small-line"></div>
-          <p className="bg-gray-400  font-medium text-sm lg:text-lg text-center px-6 my-4 lg:px-20 lg:mx-48">
-            Discover the stories of our delighted guests who have experienced the
-            comfort and convenience of our apartments. From seamless booking to
-            unforgettable stays, we&apos;re thrilled to share their glowing
-            testimonials. Explore the experiences that make us the ultimate choice
-            for your next home away from home!
-          </p>
+          <p className="bg-gray-400 lg:w-3/4 md:w-2/3 sm:1/2 text-sm lg:text-base text-center px-10 my-4 lg:px-20 lg:mx-48">
+  <span className="bg-gray-400 font-medium block lg:inline">
+    Discover the stories of our delighted guests who have experienced the comfort and convenience of our apartments.
+  </span>
+  <span className="bg-gray-400 hidden font-medium md:hidden lg:inline">
+    From seamless booking to unforgettable stays, we&apos;re thrilled to share their glowing testimonials. Explore the experiences that make us the ultimate choice for your next home away from home!
+  </span>
+</p>
+
           <div className="bg-gray-400 hidden lg:flex lg:flex-row justify-center gap-10">
             {reviews.map((item, index) => (
               <ReviewItem key={index} {...item} />
             ))}
           </div>
-          <div className="bg-gray-400 block lg:hidden">
+          <div className="bg-gray-400  md:block lg:hidden">
             {<ReviewItem key={0} {...reviews[0]} />}
           </div>
           <div className="bg-gray-400 mt-4 lg:mr-12 w-full  lg:w-2/3  flex justify-center lg:justify-end">
