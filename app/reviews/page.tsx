@@ -4,6 +4,7 @@ import ReviewItem from "../components/ReviewItem";
 import getAllReviews from "@/lib/contentfulUtils";
 import { useEffect, useState } from "react";
 import getReviews, { reviewsItem } from "@/lib/contentfulAllReviews";
+import NavBar from "../components/NavBar";
 
 const Reviews = () => {
   const [reviews, setReviews] = useState<reviewsItem[]>([]);
@@ -21,9 +22,11 @@ const Reviews = () => {
   }, []);
 
   return (
+    <>
+    <NavBar/>
     <div className="flex flex-col min-h-screen">
       <div className="flex flex-col items-center relative lg:mt-12 py-8 w-full lg:max-content flex-grow">
-        <h2 className="font-bold text-xl lg:text-2xl self-center mt-10 top-24">Reviews</h2>
+        <h2 className="bg-transparent self-center font-bold not-italic text-xl lg:text-2xl mb-2 mt-4 lg:mt-10">Reviews</h2>
         <div className="small-line"></div>
         <div className="flex flex-wrap justify-center items-center mt-4 gap-4 px-4">
           {reviews.map((item, index) => (
@@ -35,6 +38,7 @@ const Reviews = () => {
       </div>
       <Footer />
     </div>
+    </>
   );
 };
 
