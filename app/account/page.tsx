@@ -81,6 +81,8 @@ export default function Account(){
     }
 
     return (
+        <>
+            <NavBar/>
         <div className="flex flex-col min-h-screen">
         <div className="flex flex-col items-center relative lg:mt-12 py-8 w-full lg:max-content flex-grow ">
           <h2 className="font-bold text-xl lg:text-2xl self-center lg:mt-10 top-24">
@@ -108,6 +110,6 @@ export default function Account(){
         </div>
         <Footer/>
     </div>
-        
+    </>
       );
 }
