@@ -1,3 +1,4 @@
+import { title } from "process";
 
 const gqAllReviewsQuery = `query getAllReviews{
     reviewsCollection {
@@ -15,6 +16,24 @@ const gqAllReviewsQuery = `query getAllReviews{
     }
   }
 `;
+
+
+const getReviewsByApartmentQuery = `query getReviewsByApartment ($apartment: String) {
+    reviewsCollection(where: {apartment: $apartment}) {
+      items {
+        picture {
+          title
+          url
+        }
+        alt
+        name
+        apartment
+        stars
+        text
+      }
+    }
+  }`;
+
 
 export interface reviewsCollectionResponse {
     reviewsCollection: {
@@ -66,6 +85,34 @@ const getAllReviews = async (): Promise<reviewsItem[]> => {
     }
 };
 
+const getReviewsByApartment = async (apartment: string): Promise<reviewsItem[]> => {
+  console.log('Apartment:', apartment); // Debug statement
+  try {
+    const response = await fetch(baseUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${process.env.CONTENTFUL_ACCESS_TOKEN}`,
+      },
+      body: JSON.stringify({ query: getReviewsByApartmentQuery, variables: { apartment } }),
+    });
 
-export default getAllReviews;
+    const body = (await response.json()) as { data: reviewsCollectionResponse };
+    console.log('Response Body:', body); // Debug statement
 
+    return body.data.reviewsCollection.items;
+  } catch (error) {
+    console.error("Error fetching reviews:", error);
+    return [];
+  }
+};
+
+
+
+const getReviews = {
+    getReviewsByApartment,
+    getAllReviews,
+};
+
+
+export default getReviews;
