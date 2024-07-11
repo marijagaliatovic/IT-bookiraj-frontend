@@ -10,6 +10,8 @@ const gqAllApartmentsQuery = `query getAllApartments {
       location
       size
       priceNumber
+      whatWeOffer
+      information
       apartment
       specialOffer
       imagesCollection {
@@ -33,6 +35,8 @@ const getApartmentByIdQuery =  `query getApartmentById ($apartmentId:String) {
       location
       size
       priceNumber
+      whatWeOffer
+      information
       apartment
       specialOffer
       apartmentId
@@ -61,6 +65,8 @@ const gqAllSpecialOffersQuery = `query getAllSpecialoffers {
       location
       size
       priceNumber
+      whatWeOffer
+      information
       apartment
       specialOffer
       apartmentId
@@ -106,6 +112,8 @@ export interface apartmentsItem {
   location: string;
   size: string;
   priceNumber: number;
+  whatWeOffer: string[];
+  information: string;
   apartment: boolean;
   specialOffer: number;
   imagesCollection: imagesCollection ; 
@@ -124,6 +132,8 @@ export interface ApartmentsCollectionResponse {
       location: string;
       size: string;
       priceNumber: number;
+      whatWeOffer: string[];
+      information: string;
       apartment: boolean;
       specialOffer: number;
       imagesCollection: imagesCollection;
@@ -239,4 +249,3 @@ const contentfulService = {
 };
 
 export default contentfulService;
-
