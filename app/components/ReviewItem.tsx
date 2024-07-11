@@ -23,7 +23,7 @@ const ReviewItem = (item: review) => {
       starElements.push(
         <svg
           key={i}
-          className={`bg-stone-200 w-8 h-8 stroke-black stroke-1 ${
+          className={`bg-stone-200 w-6 h-6 stroke-black stroke-1 ${
             isFilled ? "fill-black" : "border-black"
           }`}
           aria-hidden="true"
@@ -36,17 +36,20 @@ const ReviewItem = (item: review) => {
     }
     return starElements;
   };
+
   return (
-    <div className="bg-stone-200 top-0 flex flex-col items-center relative m-8 lg:m-4 lg:p-4 lg:w-1/4">
-      <div className="bg-stone-200 flex flex-row justify-center gap-2 pt-5">
-        <Image
-          className="bg-stone-200 rounded-full self-start"
-          height={50}
-          width={100}
-          src={item.picture.url}
-          alt={item.picture.title}
-        ></Image>
-        <div className="bg-stone-200 flex flex-col justify-start p-2 self-center">
+    <div className="bg-stone-200 flex flex-col items-center m-4 p-5 max-w-md">
+      <div className="bg-stone-200 flex justify-center mb-5 mt-2 mr-4 items-center w-full lg:w-auto lg:pl-1">
+        <div className="bg-stone-200 rounded-full mr-4 flex-shrink-0">
+          <Image
+            className="bg-stone-200 rounded-full object-cover"
+            height={70}
+            width={70}
+            src={item.picture.url}
+            alt={item.picture.title}
+          />
+        </div>
+        <div className="bg-stone-200 flex flex-col justify-center">
           <p className="bg-stone-200 font-extrabold text-lg">{item.name}</p>
           <p className="bg-stone-200 font-bold text-base">
             for{" "}
@@ -55,13 +58,11 @@ const ReviewItem = (item: review) => {
             </span>
           </p>
           <div className="bg-stone-200 flex items-center my-2">
-            <div className="bg-stone-200 flex items-center my-2">
-              {renderStars()}
-            </div>
+            {renderStars()}
           </div>
         </div>
       </div>
-      <p className="bg-stone-200 text-left text-xs px-3 m-3">
+      <p className="bg-stone-200 text-left text-xs px-3 overflow-hidden overflow-ellipsis break-words">
         {item.text}
       </p>
     </div>
