@@ -1,27 +1,41 @@
+"use client";
 import Footer from "../components/Footer";
-import NavBar from "../components/NavBar";
 import ReviewItem from "../components/ReviewItem";
-import getAllReviews from "@/lib/contentfulAllReviews";
+import getAllReviews from "@/lib/contentfulUtils";
+import { useEffect, useState } from "react";
+import getReviews, { reviewsItem } from "@/lib/contentfulAllReviews";
 
+const Reviews = () => {
+  const [reviews, setReviews] = useState<reviewsItem[]>([]);
 
-const Reviews = async () => {
-    const reviews = await getAllReviews();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getReviews.getAllReviews();
+        setReviews(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
-    return(
-      <>
-        <NavBar/>
-        <div className="flex flex-col items-center relative lg:mt-12 py-8">
-            <h2 className="font-bold text-xl lg:text-2xl self-center mt-10 top-24">Reviews</h2>
-            <div className="small-line"></div>
-            <div className="flex flex-col lg:flex-row flex-wrap items-center justify-center top-8 lg:top-10 relative lg:mx-20 lg:items-stretch">
-              {reviews.map((item,index)=>(
-                <ReviewItem key={index} {...item} />
-              ))}
-             </div>
+  return (
+    <div className="flex flex-col min-h-screen">
+      <div className="flex flex-col items-center relative lg:mt-12 py-8 w-full lg:max-content flex-grow">
+        <h2 className="font-bold text-xl lg:text-2xl self-center mt-10 top-24">Reviews</h2>
+        <div className="small-line"></div>
+        <div className="flex flex-wrap justify-center items-center mt-4 gap-4 px-4">
+          {reviews.map((item, index) => (
+            <div key={index} className="w-full lg:w-1/3 flex justify-center">
+              <ReviewItem {...item} />
+            </div>
+          ))}
         </div>
-        <Footer/>
-      </>
-    );
-}
+      </div>
+      <Footer />
+    </div>
+  );
+};
 
 export default Reviews;
